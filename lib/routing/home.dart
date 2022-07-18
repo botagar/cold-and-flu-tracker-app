@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../common/bottom_nav_bar/bottom_nav_bar.dart';
+import '../features/record/record_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -12,6 +13,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var recordService = RecordService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

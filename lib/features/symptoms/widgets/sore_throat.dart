@@ -1,15 +1,18 @@
-import 'package:cold_flu_tracker_app/features/symptoms/symptom.dart';
+import 'package:cold_flu_tracker_app/features/symptoms/widgets/symptom.dart';
+import 'package:cold_flu_tracker_app/features/symptoms/dao/symptom.dart' as dao;
 import 'package:flutter/material.dart';
 
 class SoreThroatSymptom extends StatelessWidget {
-  const SoreThroatSymptom({Key? key}) : super(key: key);
+  final void Function(dao.Symptom symptom)? onSymptomUpdated;
+
+  const SoreThroatSymptom({Key? key, this.onSymptomUpdated}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Symptom(
+    return Symptom(
       title: "Sore Throat",
       defaultExplainerText: "Not experiencing this symptom",
-      explainerText: {
+      explainerText: const {
         0: "Not experiencing this symptom",
         1: "Only slight discomfort when swallowing",
         2: "2",
@@ -22,6 +25,7 @@ class SoreThroatSymptom extends StatelessWidget {
         9: "9",
         10: "Pain inhibits swallowing and breathing",
       },
+      onSymptomUpdate: onSymptomUpdated,
     );
   }
 }

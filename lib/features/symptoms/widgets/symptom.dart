@@ -1,15 +1,19 @@
+import 'package:cold_flu_tracker_app/features/symptoms/dao/symptom.dart' as dao;
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class Symptom extends StatefulWidget {
   final String title;
   final String defaultExplainerText;
   final Map<int, String> explainerText;
+  final void Function(dao.Symptom symptom)? onSymptomUpdate;
 
   const Symptom(
       {Key? key,
       this.title = "New Symptom",
-      this.defaultExplainerText = "Not experiencing this symptom",
-      this.explainerText = const {}})
+      this.defaultExplainerText = "Not experiencing this symptom.",
+      this.explainerText = const {},
+      this.onSymptomUpdate})
       : super(key: key);
 
   @override
@@ -30,20 +34,25 @@ class _SymptomState extends State<Symptom> {
             Text(
               widget.title,
               overflow: TextOverflow.visible,
-              style: Theme.of(context).textTheme.labelLarge,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ],
         ),
         Row(
           children: [
-            Text(widget.explainerText[_rating] ?? widget.defaultExplainerText)
+            Flexible(
+              child: Text(
+                widget.explainerText[_rating] ?? widget.defaultExplainerText,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            )
           ],
         ),
         Row(
           children: [
             Expanded(
               flex: 1,
-              child: Slider(
+              child: Slider.adaptive(
                   value: _rating,
                   min: 0,
                   max: 10,
@@ -53,6 +62,17 @@ class _SymptomState extends State<Symptom> {
                     setState(() {
                       _rating = value;
                     });
+                    if (widget.onSymptomUpdate != null) {
+                      widget.onSymptomUpdate!(
+                        dao.Symptom(
+                            id: const Uuid().v4(),
+                            name: widget.title,
+                            rating: value.toInt(),
+                            dateOfSymptom: DateTime.now(),
+                            explainerText: widget.explainerText[_rating] ??
+                                widget.defaultExplainerText),
+                      );
+                    }
                   }),
             )
           ],
