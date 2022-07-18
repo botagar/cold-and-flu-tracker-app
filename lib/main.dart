@@ -1,17 +1,18 @@
-import 'package:cold_flu_tracker_app/routing/profile.dart';
-import 'package:cold_flu_tracker_app/routing/record.dart';
+import 'package:cold_flu_tracker_app/pages/profile.dart';
+import 'package:cold_flu_tracker_app/pages/record.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'features/record/record.dart';
 import 'features/symptoms/dao/symptom.dart';
-import 'routing/home.dart';
+import 'pages/home.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(RecordAdapter());
   Hive.registerAdapter(SymptomAdapter());
+  await Hive.openBox<Record>('records');
 
   runApp(const ColdAndFluTrackingApp());
 }

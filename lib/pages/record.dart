@@ -36,11 +36,10 @@ class _RecordPageState extends State<RecordPage> {
             {symptoms.remove(symptom.name)}
           else
             {symptoms[symptom.name] = symptom},
-          print(symptoms)
         };
 
     void saveState() => {
-          print("Saving state"),
+          debugPrint("Saving state"),
           record = dao.Record(
             id: const Uuid().v4(),
             timeOfRecord: DateTime.now(),

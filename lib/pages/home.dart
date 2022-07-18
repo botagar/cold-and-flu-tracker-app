@@ -1,3 +1,4 @@
+import 'package:cold_flu_tracker_app/features/calendar/calendar.dart';
 import 'package:flutter/material.dart';
 
 import '../common/bottom_nav_bar/bottom_nav_bar.dart';
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
+      body: Column(children: const [Calendar()]),
       bottomNavigationBar: BottomNavBar.build(context),
     );
   }

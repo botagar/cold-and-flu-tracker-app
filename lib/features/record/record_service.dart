@@ -15,6 +15,6 @@ class RecordService {
 
   Future<List<Record>> getAllRecords() async {
     var recordsBox = await records;
-    return recordsBox.values.toList().cast<Record>();
+    return recordsBox.values.where(((record) => true)).toList().cast<Record>();
   }
 }
