@@ -27,12 +27,21 @@ class _CalendarState extends State<Calendar> {
         bool isFocused) {
       int alpha = (calendarService.getSicknessRatingForDay(day) * 255).toInt();
       var color = backgroundColor.withAlpha(alpha);
+
+      Border? borderStyle;
+      BorderRadiusGeometry? borderRadius;
+      BoxShape shape = BoxShape.rectangle;
+      if (isFocused) {
+        borderStyle = Border.all(width: 1);
+        shape = BoxShape.circle;
+      }
+
       return Container(
         decoration: BoxDecoration(
           color: color,
-          border:
-              isFocused ? Border.all(width: 1, color: Colors.redAccent) : null,
-          borderRadius: isFocused ? BorderRadius.circular(100) : null,
+          border: borderStyle,
+          borderRadius: borderRadius,
+          shape: shape,
         ),
         child: Center(
           child: Text(
@@ -45,7 +54,7 @@ class _CalendarState extends State<Calendar> {
 
     return TableCalendar(
       firstDay: DateTime.utc(2018, 1, 1),
-      lastDay: DateTime(DateTime.now().year, DateTime.now().month + 2, 0),
+      lastDay: DateTime(DateTime.now().year, DateTime.now().month + 1, 0),
       focusedDay: DateTime.now(),
       headerVisible: true,
       headerStyle: const HeaderStyle(
@@ -71,14 +80,16 @@ class _CalendarState extends State<Calendar> {
       calendarBuilders: CalendarBuilders(
         defaultBuilder:
             (BuildContext context, DateTime day, DateTime focusedDay) {
-          return _scoredBackground(context, day, focusedDay, Colors.blue,
-              const Color.fromARGB(255, 255, 0, 0), false);
+          return _scoredBackground(
+              context, day, focusedDay, Colors.blue, Colors.red, false);
         },
-        selectedBuilder:
-            (BuildContext context, DateTime day, DateTime focusedDay) {
-          return _scoredBackground(context, day, focusedDay, Colors.blue,
-              const Color.fromARGB(255, 255, 0, 0), true);
-        },
+        // selectedBuilder:
+        //     (BuildContext context, DateTime day, DateTime focusedDay) {
+        //   return _scoredBackground(
+        //       context, day, focusedDay, Colors.blue, Colors.red, true);
+        // },
+        // todayBuilder:
+        //     (BuildContext context, DateTime day, DateTime focusedDay) {},
         outsideBuilder:
             (BuildContext context, DateTime day, DateTime focusedDay) {
           return _scoredBackground(context, day, focusedDay, Colors.grey,

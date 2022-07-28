@@ -1,3 +1,5 @@
+import 'package:cold_flu_tracker_app/features/infection/dao/infection.dart';
+import 'package:cold_flu_tracker_app/pages/list_view.dart';
 import 'package:cold_flu_tracker_app/pages/profile.dart';
 import 'package:cold_flu_tracker_app/pages/record.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,9 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(RecordAdapter());
   Hive.registerAdapter(SymptomAdapter());
+  Hive.registerAdapter(InfectionAdapter());
   await Hive.openBox<Record>('records');
+  await Hive.openBox<Infection>('infections');
 
   runApp(const ColdAndFluTrackingApp());
 }
@@ -38,6 +42,7 @@ class ColdAndFluTrackingApp extends StatelessWidget {
       routes: {
         '/addRecord': (context) => const RecordPage(),
         '/profile': (context) => const ProfilePage(),
+        '/listview': (context) => const ListViewPage(),
       },
     );
   }

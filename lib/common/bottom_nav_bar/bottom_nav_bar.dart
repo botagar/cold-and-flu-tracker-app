@@ -24,7 +24,7 @@ class BottomNavBar {
           IconButton(
             enableFeedback: false,
             onPressed: () async {
-              Navigator.pushNamed(context, '/details');
+              Navigator.pushNamed(context, '/listview');
             },
             icon: const Icon(
               Icons.list_outlined,
