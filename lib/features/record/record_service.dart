@@ -1,20 +1,25 @@
-import 'package:cold_flu_tracker_app/features/record/record.dart';
-import 'package:hive/hive.dart';
+import 'package:cold_flu_tracker_app/features/infection/infection_service.dart';
+import 'package:cold_flu_tracker_app/features/record/dao/record.dart';
 
 class RecordService {
-  late Future<Box> records;
+  InfectionService infectionService = InfectionService();
 
-  RecordService() {
-    records = Hive.openBox<Record>('records');
+  RecordService({InfectionService? infectionService}) {
+    if (infectionService != null) {
+      this.infectionService = infectionService;
+    }
   }
 
   void saveRecord(Record recordToSave) async {
-    var recordsBox = await records;
-    recordsBox.add(recordToSave);
+    var currentInfection = await infectionService.getCurrentInfection();
+    currentInfection.records.add(recordToSave);
+    currentInfection.save();
   }
 
-  Future<List<Record>> getAllRecords() async {
-    var recordsBox = await records;
-    return recordsBox.values.where(((record) => true)).toList().cast<Record>();
+  Future<List<Record>> getAllRecordsForInfection(
+      {required String infectionId}) async {
+    // var recordsBox = await records;
+    // return recordsBox.values.where(((record) => true)).toList().cast<Record>();
+    return Future.value(List.empty());
   }
 }

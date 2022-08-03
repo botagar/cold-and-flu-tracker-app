@@ -1,3 +1,4 @@
+import 'package:cold_flu_tracker_app/features/record/dao/record.dart';
 import 'package:hive_flutter/adapters.dart';
 
 part 'infection.g.dart';
@@ -8,13 +9,13 @@ class Infection extends HiveObject {
   final String id;
 
   @HiveField(1)
-  final DateTime startOfInfection;
+  DateTime startOfInfection;
 
   @HiveField(2)
-  final DateTime endOfInfection;
+  DateTime endOfInfection;
 
   @HiveField(3)
-  final List<Infection> records;
+  List<Record> records;
 
   Infection({
     required this.id,

@@ -20,7 +20,7 @@ class InfectionAdapter extends TypeAdapter<Infection> {
       id: fields[0] as String,
       startOfInfection: fields[1] as DateTime,
       endOfInfection: fields[2] as DateTime,
-      records: (fields[3] as List).cast<Infection>(),
+      records: (fields[3] as List).cast<Record>(),
     );
   }
 

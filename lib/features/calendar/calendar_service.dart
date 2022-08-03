@@ -1,4 +1,4 @@
-import 'package:cold_flu_tracker_app/features/record/record.dart';
+import 'package:cold_flu_tracker_app/features/record/dao/record.dart';
 import 'package:cold_flu_tracker_app/features/symptoms/dao/symptom.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';

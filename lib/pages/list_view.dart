@@ -21,19 +21,36 @@ class _ListViewPageState extends State<ListViewPage> {
         title: const Text("Review Records"),
       ),
       bottomNavigationBar: BottomNavBar.build(context),
-      body: ListView.separated(
-        itemBuilder: (BuildContext context, int index) {
-          return InfectionListElement(
-              infection: Infection(
-                  id: "",
-                  startOfInfection: DateTime.now(),
-                  endOfInfection: DateTime.now()));
-        },
-        itemCount: 1,
-        separatorBuilder: (BuildContext context, int index) => const Divider(
-          thickness: 4,
-        ),
-      ),
+      body: generateListViewBody(),
+    );
+  }
+
+  Widget generateListViewBody() {
+    return FutureBuilder(
+      initialData: const Center(
+          child: Icon(
+        Icons.list_outlined,
+        color: Colors.white,
+        size: 35,
+      )),
+      future: infectionService.getCurrentInfection(),
+      builder: (context, snapshot) {
+        return ListView.builder(
+          itemCount: snapshot.data is Infection
+              ? (snapshot.data as Infection).records.length
+              : 1,
+          itemBuilder: (context, index) {
+            if (snapshot.data is! Infection) {
+              return const Text("Loading");
+            }
+            var infection = snapshot.data as Infection;
+
+            return InfectionListElement(
+              infection: infection,
+            );
+          },
+        );
+      },
     );
   }
 }

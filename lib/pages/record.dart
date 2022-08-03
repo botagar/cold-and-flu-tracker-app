@@ -1,5 +1,5 @@
 import 'package:cold_flu_tracker_app/features/record/record_service.dart';
-import 'package:cold_flu_tracker_app/features/record/record.dart' as dao;
+import 'package:cold_flu_tracker_app/features/record/dao/record.dart' as dao;
 import 'package:cold_flu_tracker_app/features/symptoms/dao/symptom.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
