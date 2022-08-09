@@ -29,7 +29,7 @@ class DateTimeDisplay extends StatelessWidget {
 
     return IntrinsicWidth(
       child: Container(
-        padding: const EdgeInsets.all(4),
+        padding: const EdgeInsets.only(left: 4, top: 4, bottom: 4, right: 6),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8)),
           color: Color.fromARGB(255, 225, 225, 225),
