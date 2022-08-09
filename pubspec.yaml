@@ -23,6 +23,7 @@ dependencies:
   fl_chart: ^0.55.0
   mocktail: ^0.3.0
   clock: ^1.1.0
+  flutter_timeline: ^0.3.0
 
 dev_dependencies:
   flutter_test:

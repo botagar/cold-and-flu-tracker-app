@@ -11,9 +11,7 @@ class RecordService {
   }
 
   void saveRecord(Record recordToSave) async {
-    var currentInfection = await infectionService.getCurrentInfection();
-    currentInfection.records.add(recordToSave);
-    currentInfection.save();
+    await infectionService.addRecordToCurrentInfection(recordToSave);
   }
 
   Future<List<Record>> getAllRecordsForInfection(
