@@ -67,14 +67,10 @@ class _ListViewPageState extends State<ListViewPage> {
                         children: [
                           DateTimeDisplay(
                             dateTime: currentInfection.startOfInfection,
-                            showDate: true,
-                            showTime: false,
                           ),
                           const Text(' to '),
                           DateTimeDisplay(
                             dateTime: currentInfection.endOfInfection,
-                            showDate: true,
-                            showTime: false,
                           ),
                         ],
                       ),

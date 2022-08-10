@@ -13,8 +13,7 @@ class InfectionTimelineEvents {
             child: TimelineEventCard(
               title: DateTimeDisplay(
                 dateTime: record.timeOfRecord,
-                showDate: true,
-                showTime: true,
+                foreground: false,
               ),
               content: Column(
                   children: record.symptoms

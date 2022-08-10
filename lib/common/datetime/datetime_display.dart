@@ -27,8 +27,6 @@ class DateTimeDisplay extends StatelessWidget {
     String dateTimeText =
         DateFormat(dtFormatStringBuffer.toString().trim()).format(dateTime);
 
-    // TODO: Use Foreground paramter to make text black or grey
-
     return IntrinsicWidth(
       child: Container(
         padding: const EdgeInsets.only(left: 4, top: 4, bottom: 4, right: 6),
@@ -37,9 +35,9 @@ class DateTimeDisplay extends StatelessWidget {
           color: Color.fromARGB(255, 225, 225, 225),
         ),
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          const Icon(
+          Icon(
             Icons.calendar_month,
-            color: Colors.grey,
+            color: foreground ? Colors.black : Colors.grey,
             size: 24,
           ),
           Padding(
