@@ -1,6 +1,6 @@
 import 'package:cold_flu_tracker_app/common/bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:cold_flu_tracker_app/common/datetime/datetime_display.dart';
 import 'package:cold_flu_tracker_app/features/infection/dao/infection.dart';
-import 'package:cold_flu_tracker_app/features/infection/infection_list_element.dart';
 import 'package:cold_flu_tracker_app/features/infection/infection_service.dart';
 import 'package:cold_flu_tracker_app/features/infection/infection_timeline_events.dart';
 import 'package:flutter/material.dart';
@@ -47,21 +47,59 @@ class _ListViewPageState extends State<ListViewPage> {
             break;
           case ConnectionState.done:
             var currentInfection = snapshot.data as Infection;
-            return TimelineTheme(
-                data: TimelineThemeData(
-                  lineColor: Colors.blueAccent,
-                  strokeCap: StrokeCap.round,
-                  itemGap: 10,
-                  lineGap: 0,
-                  gutterSpacing: 0,
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 8.0),
+                            child: Text('Infection period of'),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          DateTimeDisplay(
+                            dateTime: currentInfection.startOfInfection,
+                            showDate: true,
+                            showTime: false,
+                          ),
+                          const Text(' to '),
+                          DateTimeDisplay(
+                            dateTime: currentInfection.endOfInfection,
+                            showDate: true,
+                            showTime: false,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                child: Timeline(
-                  anchor: IndicatorPosition.top,
-                  indicatorSize: 42,
-                  altOffset: const Offset(0, 4),
-                  events: InfectionTimelineEvents.generateEvents(
-                      context, currentInfection),
-                ));
+                Expanded(
+                  child: TimelineTheme(
+                      data: TimelineThemeData(
+                        lineColor: Colors.blueAccent,
+                        strokeCap: StrokeCap.round,
+                        itemGap: 10,
+                        lineGap: 0,
+                        gutterSpacing: 0,
+                      ),
+                      child: Timeline(
+                        anchor: IndicatorPosition.top,
+                        indicatorSize: 42,
+                        altOffset: const Offset(0, 7),
+                        events: InfectionTimelineEvents.generateEvents(
+                            context, currentInfection),
+                      )),
+                ),
+              ],
+            );
         }
         return const Text('Loading latest infection data');
       },

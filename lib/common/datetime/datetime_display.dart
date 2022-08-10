@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -7,12 +5,14 @@ class DateTimeDisplay extends StatelessWidget {
   final DateTime dateTime;
   final bool showDate;
   final bool showTime;
+  final bool foreground;
 
   const DateTimeDisplay(
       {Key? key,
       required this.dateTime,
-      required this.showDate,
-      required this.showTime})
+      this.showDate = true,
+      this.showTime = true,
+      this.foreground = true})
       : super(key: key);
 
   @override
@@ -26,6 +26,8 @@ class DateTimeDisplay extends StatelessWidget {
     }
     String dateTimeText =
         DateFormat(dtFormatStringBuffer.toString().trim()).format(dateTime);
+
+    // TODO: Use Foreground paramter to make text black or grey
 
     return IntrinsicWidth(
       child: Container(
