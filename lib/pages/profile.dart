@@ -9,6 +9,22 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final bool _isEditingText = false;
+  late final TextEditingController _editingController;
+  final String initialText = "Initial Text";
+
+  @override
+  void initState() {
+    super.initState();
+    _editingController = TextEditingController(text: initialText);
+  }
+
+  @override
+  void dispose() {
+    _editingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +34,9 @@ class _ProfilePageState extends State<ProfilePage> {
       bottomNavigationBar: BottomNavBar.build(context),
       body: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
-          return Text("Hi");
+          return TextField(
+              // controller: _editingController,
+              );
         },
         itemCount: 1,
         separatorBuilder: (BuildContext context, int index) => const Divider(

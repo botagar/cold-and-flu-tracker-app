@@ -33,8 +33,8 @@ class ColdAndFluTrackingApp extends StatelessWidget {
       home: const HomePage(title: 'Cold and Flu Tracker'),
       routes: {
         '/addRecord': (context) => const RecordPage(),
-        '/profile': (context) => const ProfilePage(),
         '/listview': (context) => const ListViewPage(),
+        '/profile': (context) => const ProfilePage(),
       },
     );
   }
